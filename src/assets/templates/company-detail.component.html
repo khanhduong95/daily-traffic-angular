@@ -1,0 +1,27 @@
+<div *ngIf="company">
+  <h2>{{company.name}}</h2>
+  <div>
+    <label>Email: {{company.email}}</label>
+  </div>
+  <div>
+    <label>Founded: {{company.dob}}</label>
+  </div>
+  <div>
+    <label>Website: {{company.website}}</label>
+  </div>
+  <div>
+    <label><h4>Jobs from {{company.name}}</h4></label>
+  </div>
+  <div>
+    <table class="table table-hover">
+      <tr *ngFor="let job of jobs">
+    	<td>{{job.title}}</td>
+    	<td>{{job.description}}</td>
+	<td>
+	  <button class="btn btn-default" (click)="gotoJobDetail(job.id)">View Details</button>
+	</td>
+      </tr>
+    </table>
+
+  </div>
+</div>

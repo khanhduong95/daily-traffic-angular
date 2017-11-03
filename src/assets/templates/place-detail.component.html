@@ -1,0 +1,12 @@
+<div *ngIf="place">
+    <div>
+	<label>Latitude: {{place.latitude}}</label>
+    </div>
+    <div>
+	<label>Longitude: {{place.longitude}}</label>
+    </div>
+</div>
+
+<div *ngIf="error">
+    <h2>{{error}}</h2>
+</div>

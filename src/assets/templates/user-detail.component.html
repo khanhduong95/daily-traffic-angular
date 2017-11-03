@@ -1,0 +1,22 @@
+<div *ngIf="user">
+    <div class="row">
+	<h2>{{user.name}}</h2>
+	<div *ngIf="! loggedIn">EDIT</div>
+    </div>
+    <div>
+	<label>Email: {{user.email}}</label>
+    </div>
+    <div>
+	<label>Name: {{user.name}}</label>
+    </div>
+    <div>
+	<label>Phone: {{user.phone}}</label>
+    </div>
+    <div>
+	<label>Birthday: {{user.birthday | date:"dd/MM/yyyy"}}</label>
+    </div>
+</div>
+
+<div *ngIf="error">
+    <h2>{{error}}</h2>
+</div>

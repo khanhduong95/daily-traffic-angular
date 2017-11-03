@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="col-md-4">
+    <h2>Companies</h2>
+    <table class="table table-hover">
+      <tbody>
+	<tr *ngFor="let company of companies">
+          <td (click)="goToCompanyDetail(company.id)"><h3>{{company.name}}</h3></td>
+          <td>{{company.email}}</td>
+	  <td>
+	    <button class="btn btn-default">View Details</button>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+    <!-- table -->
+  </div>
+  <!-- col-md-4 -->
+  <div class="col-md-4">
+    <h2>Jobs</h2>
+
+    <table class="table table-hover">
+      <tbody>
+	<tr *ngFor="let job of jobs">
+          <td (click)="goToJobDetail(job.id)"><h3>{{job.title}}</h3></td>
+	</tr>
+      </tbody>
+    </table>
+    <!-- table -->
+  </div>
+  <!-- col-md-4 -->
+
+</div>
