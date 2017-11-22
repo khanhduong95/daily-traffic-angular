@@ -36,10 +36,6 @@ export class UserComponent implements OnInit {
 	this.getList(1);
     }
 
-    getDetail(id: number): void {
-	this.router.navigate(['/user', id]);
-    }
-
     // add(name: string): void {
     // 	name = name.trim();
     // 	if (!name) { return; }

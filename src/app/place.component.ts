@@ -22,6 +22,10 @@ export class PlaceComponent implements OnInit {
 	private placeService: PlaceService
     ) {}
 
+    ngOnInit(): void {
+	this.getList(1);
+    }
+
     getList(page: number): void {
 	this.placeService.getList(page).then(response => {
 	    this.placesList = response.data;
@@ -30,14 +34,6 @@ export class PlaceComponent implements OnInit {
 	    this.previousPage = response.prev_page_url;
 	    this.nextPage = response.next_page_url;
 	});
-    }
-
-    ngOnInit(): void {
-	this.getList(1);
-    }
-
-    getDetail(id: number): void {
-	this.router.navigate(['/place', id]);
     }
 
     // add(name: string): void {

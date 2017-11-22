@@ -13,7 +13,7 @@
 	    <td>{{place.latitude}}</td>
 	    <td>{{place.longitude}}</td>
 	    <td class="text-right">
-		<a (click)="getDetail(place.id)"><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
+		<a routerLink="/place/{{place.id}}"><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
 	    </td>
 	</tr>
     </tbody>

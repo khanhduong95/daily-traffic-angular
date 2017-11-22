@@ -14,7 +14,6 @@ import 'rxjs/add/operator/switchMap';
 
 export class UserEditComponent implements OnInit {
 
-    input;
     inputError: string;
     passwordMode: boolean;
 
@@ -26,17 +25,13 @@ export class UserEditComponent implements OnInit {
     
     ngOnInit(): void {
 	this.route.paramMap
-	    .switchMap((params: ParamMap) => this.setMode(params.get("mode")))
+	    .switchMap((params: ParamMap) => this.setCurrentMode(params.get("mode")))
 	    .subscribe(response => {});
     }
     
-    setMode(mode: string): string {
-	if (mode == "password")
-	    this.passwordMode = true;
-	else
-	    this.passwordMode = false;
-	
-	return mode;
+    setCurrentMode(mode: string): Array<any>{
+	this.passwordMode = mode == "password";
+	return [];
     }
 
     updateInfo(params: any): void {

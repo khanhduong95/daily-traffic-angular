@@ -1,21 +1,19 @@
-<h2>List of Users</h2>
+<h2>Visited Places</h2>
 
-<table class="table table-hover">
+<table *ngIf="loggedIn && currentUser" class="table table-hover">
     <thead>
 	<tr>
-	    <th>Name</th>
-	    <th>Email</th>
-	    <th>Birthday</th>
+	    <th>Latitude</th>
+	    <th>Longitude</th>
 	    <th></th>
 	</tr>
     </thead>
     <tbody>
-	<tr *ngFor="let user of usersList">
-	    <td>{{user.name}}</td>
-	    <td>{{user.email}}</td>
-	    <td>{{user.birthday | date:"dd/MM/yyyy"}}</td>
+	<tr *ngFor="let place of placesList">
+	    <td>{{place.latitude}}</td>
+	    <td>{{place.longitude}}</td>
 	    <td class="text-right">
-		<a routerLink="/user/{{user.id}}"><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
+		<a routerLink="/place/{{place.id}}"><i class="fa fa-eye" aria-hidden="true"></i> View Details</a>
 	    </td>
 	</tr>
     </tbody>

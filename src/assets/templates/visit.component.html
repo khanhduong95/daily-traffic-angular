@@ -1,0 +1,18 @@
+<div *ngIf="currentUser && placeId">
+    <h3>Your Visits</h3>
+    
+    <table class="table table-hover">
+	<tbody>
+	    <tr *ngFor="let visit of visitsList">
+		<td>{{visit.time | date:"dd/MM/yyyy HH:mm"}}</td>
+		<td class="text-right">
+		    <a (click)="delete(visit.id)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+		</td>
+	    </tr>
+	</tbody>
+    </table>
+
+    <a class="btn btn-default" (click)="getList(currentPage - 1)" *ngIf="previousPage != undefined"><<</a>
+    <input type="number" [(ngModel)]="currentPage" (change)="getList(currentPage)" placeholder="Page"/> / {{lastPage}}
+    <a class="btn btn-default" (click)="getList(currentPage + 1)" *ngIf="nextPage != undefined">>></a>
+</div>

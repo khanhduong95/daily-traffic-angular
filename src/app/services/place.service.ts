@@ -18,6 +18,13 @@ export class PlaceService {
             .catch(this.handleError);
     }
     
+    getListByUser(userId: number, page: number, token: string): Promise<any> {
+	return this.http.get(AppConfig.API_USER + "/" + userId + "/places?page=" + page + "&token=" + token)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+    
     getDetail(id: number): Promise<Place> {
     	const url = AppConfig.API_PLACE + "/" + id;
     	return this.http.get(url)

@@ -10,8 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent }  from './app.component';
 
-// import { TrafficService } from './services/traffic.service';
+import { VisitComponent } from './visit.component';
+import { VisitService } from './services/visit.service';
 
+import { VisitedPlaceComponent } from './visited-place.component';
 import { PlaceDetailComponent } from './place-detail.component';
 import { PlaceComponent } from './place.component';
 import { PlaceService } from './services/place.service';
@@ -41,18 +43,19 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ],
     declarations: [
 	AppComponent,
-	// TrafficDetailComponent,
-	// TrafficComponent,
+	VisitComponent,
+	VisitedPlaceComponent,
 	PlaceDetailComponent,
 	PlaceComponent,
 	UserDetailComponent,
 	UserEditComponent,
 	UserComponent,
-	EqualValidator// ,
+	EqualValidator,
 	// HomeComponent
     ],
     bootstrap: [ AppComponent ],
     providers: [ 
+	VisitService, 
 	PlaceService, 
 	UserService
     ]

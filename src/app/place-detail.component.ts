@@ -29,9 +29,9 @@ export class PlaceDetailComponent implements OnInit {
 	    .subscribe(response => {
 		this.place = response;
 	    }, error => {
+		console.log("PlaceDetail ERROR: ");
 		console.log(error);
 		this.error = "Place not found.";
 	    });
     }
-
 }

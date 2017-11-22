@@ -9,7 +9,7 @@ import { Visit } from '../models/visit';
 export class VisitService {
     
     private headers = new Headers({'Content-Type': 'application/json'});
-    constructor(private http: Http) { }    
+    constructor(private http: Http) { }
     
     getList(page: number): Promise<any> {
 	return this.http.get(AppConfig.API_VISIT + "?page=" + page)
@@ -18,12 +18,19 @@ export class VisitService {
             .catch(this.handleError);
     }
     
+    getListByUserPlace(userId: number, placeId: number, page: number, token: string): Promise<any> {
+	return this.http.get(AppConfig.API_USER + "/" + userId + "/places/" + placeId + "/visits?page=" + page + "&token=" + token)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+    
     getDetail(id: number): Promise<Visit> {
-	const url = AppConfig.API_VISIT + "/" + id;
-	return this.http.get(url)
-	    .toPromise()
-	    .then(response => response.json() as Visit)
-	    .catch(this.handleError);
+    	const url = AppConfig.API_VISIT + "/" + id;
+    	return this.http.get(url)
+    	    .toPromise()
+    	    .then(response => response.json() as Visit)
+    	    .catch(this.handleError);
     }
 
     // create(name: string): Promise<Hero> {
@@ -43,16 +50,14 @@ export class VisitService {
     // 	    .catch(this.handleError);
     // }
 
-    // delete(id: number): Promise<void> {
-    // 	const url = `${this.heroesUrl}/${id}`;
-    // 	return this.http.delete(url, {headers: this.headers})
-    // 	    .toPromise()
-    // 	    .then(() => null)
-    // 	    .catch(this.handleError);
-    // }
+    delete(id: number, token: string): void {
+    	const url = AppConfig.API_VISIT + "/" + id;
+    	this.http.delete(url, {headers: this.headers, params: {token: token}})
+	    .subscribe(response => response);
+    }
 
     private handleError(error: any): Promise<any> {
-	alert(error); // for demo purposes only
-	return Promise.reject(error.message || error);
+	console.log("VisitService ERROR: "+error); // for demo purposes only
+	return Promise.reject(error);
     }
 }
