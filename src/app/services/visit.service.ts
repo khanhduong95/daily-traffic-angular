@@ -3,26 +3,26 @@ import { Headers, Http } from '@angular/http';
 import { AppConfig } from '../app.config';
 import 'rxjs/add/operator/toPromise';
 
-import { Traffic } from '../models/traffic';
+import { Visit } from '../models/visit';
 
 @Injectable()
-export class TrafficService {
+export class VisitService {
     
     private headers = new Headers({'Content-Type': 'application/json'});
-    constructor(private http: Http) { }
+    constructor(private http: Http) { }    
     
-    getTraffic(): Promise<Traffic[]> {
-	return this.http.get(AppConfig.API_TRAFFIC)
+    getList(page: number): Promise<any> {
+	return this.http.get(AppConfig.API_VISIT + "?page=" + page)
             .toPromise()
-            .then(response => response.json().data as Traffic[])
+            .then(response => response.json())
             .catch(this.handleError);
     }
     
-    getTrafficDetail(id: number): Promise<Traffic> {
-	const url = AppConfig.API_TRAFFIC + "/" + id;
+    getDetail(id: number): Promise<Visit> {
+	const url = AppConfig.API_VISIT + "/" + id;
 	return this.http.get(url)
 	    .toPromise()
-	    .then(response => response.json() as Traffic)
+	    .then(response => response.json() as Visit)
 	    .catch(this.handleError);
     }
 

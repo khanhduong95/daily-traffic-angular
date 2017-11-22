@@ -11,16 +11,22 @@
 		<li>
 		    <a routerLink="/places" routerLinkActive="active">Places</a>
 		</li>
-		<li>
-		    <a routerLink="/traffic" routerLinkActive="active">Traffic</a>
-		</li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
-		<li *ngIf="loggedIn" dropdown>
+		<li *ngIf="currentUser" dropdown>
 		    <a href dropdownToggle (click)="false">{{currentUser.email}}<span class="caret"></span></a>
 		    <ul *dropdownMenu class="dropdown-menu">
 			<li>
-			    <a class="dropdown-item" routerLink="/user/{{currentUser.id}}">Profile</a>
+			    <a class="dropdown-item" routerLink="/user/{{currentUser.id}}">View Profile</a>
+			</li>
+			<li>
+			    <a class="dropdown-item" routerLink="/visited-places">Visited Places</a>
+			</li>
+			<li>
+			    <a class="dropdown-item" routerLink="/edit/profile">Edit Profile</a>
+			</li>
+			<li>
+			    <a class="dropdown-item" routerLink="/edit/password">Edit Password</a>
 			</li>
 			<li>
 			    <a class="dropdown-item" (click)="logout()">Logout</a>
@@ -28,7 +34,7 @@
 		    </ul>
 		</li>	    
 
-		<li *ngIf="! loggedIn" dropdown>
+		<li *ngIf="! currentUser" dropdown>
 		    <a href dropdownToggle (click)="false">Guest<span class="caret"></span></a>
 		    <ul *dropdownMenu class="dropdown-menu">
 			<li>
@@ -46,7 +52,7 @@
     <router-outlet></router-outlet>
 </div>
 
-<template #loginTemplate>
+<ng-template #loginTemplate>
     <div class="modal-header">
 	<h4 class="modal-title pull-left">Login</h4>
 	<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -78,9 +84,9 @@
     <div class="modal-footer">
 	<button (click)="login()" class="btn btn-success">Login</button>	
     </div>
-</template>
+</ng-template>
 
-<template #registerTemplate>
+<ng-template #registerTemplate>
     <div class="modal-header">
 	<h4 class="modal-title pull-left">Register</h4>
 	<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -119,4 +125,4 @@
     <div class="modal-footer">
 	<button (click)="register()" class="btn btn-success">Register</button>	
     </div>
-</template>
+</ng-template>

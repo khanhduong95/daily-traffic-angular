@@ -1,0 +1,86 @@
+<div *ngIf="loggedIn && currentUser">
+    <form *ngIf="! passwordMode" #updateInfoForm="ngForm" class="form-horizontal">
+	<div class="form-group">
+	    <label for="email" class="col-md-3">Email:</label>
+	    <div class="col-md-9">
+		<input class="form-control" id="email" name="email" placeholder="test@example.com" [ngModel]="currentUser.email" required email #email="ngModel"/>
+	    </div>
+	</div>
+
+	<div class="form-group">
+	    <label for="name" class="col-md-3">Name:</label>
+	    <div class="col-md-9">
+		<input class="form-control" id="name" name="name" placeholder="Firstname Lastname" [ngModel]="currentUser.name" #name="ngModel"/>
+	    </div>
+	</div>	    
+
+	<div class="form-group">
+	    <label for="phone" class="col-md-3">Phone Number:</label>
+	    <div class="col-md-9">
+		<input class="form-control" id="phone" name="phone" placeholder="09xxxxxxxxx" [ngModel]="currentUser.phone" #phone="ngModel"/>
+	    </div>
+	</div>	    
+
+	<div class="form-group">
+	    <label for="birthday" class="col-md-3">Date of Birth:</label>
+	    <div class="col-md-9">
+		<input class="form-control" id="birthday" name="birthday" [ngModel]="currentUser.birthday" #birthday="ngModel"/>
+	    </div>
+	</div>	    
+
+	<div *ngIf="updateInfoForm.invalid && (updateInfoForm.touched || updateInfoForm.dirty)" class="alert alert-danger">
+	    <p *ngIf="email.errors && email.errors.required">The email field is required.</p>
+	    <p *ngIf="email.errors && email.errors.email">The email must be a valid email address.</p>
+	</div>
+	<div *ngIf="inputError" class="alert alert-danger">
+	    {{inputError}}
+	</div>
+
+	<div class="form-group">
+	    <div class="col-md-12">
+		<button [disabled]="updateInfoForm.invalid" (click)="updateInfo(updateInfoForm.value)" class="btn btn-success">Update</button>	
+		<button (click)="delete()" class="btn btn-danger">Delete</button>	
+	    </div>
+	</div>	    
+
+    </form>
+
+    <form *ngIf="passwordMode" #updatePasswordForm="ngForm" class="form-horizontal">
+	<div class="form-group">
+	    <label for="password" class="col-md-12">Current Password</label>
+	    <div class="col-md-12">
+		<input type="password" class="form-control" id="current_password" name="current_password" [(ngModel)]="input.current_password" required #current_password="ngModel"/>
+	    </div>
+	</div>	    
+
+	<div class="form-group">
+	    <label for="password" class="col-md-12">New Password</label>
+	    <div class="col-md-12">
+		<input type="password" class="form-control" id="new_password" name="new_password" [(ngModel)]="input.new_password" required #new_password="ngModel"/>
+	    </div>
+	</div>	    
+
+	<div class="form-group">
+	    <label for="password" class="col-md-12">Confirm New Password</label>
+	    <div class="col-md-12">
+		<input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" [(ngModel)]="input.new_password_confirmation" required equalValidate="new_password" #new_password_confirmation="ngModel"/>
+	    </div>
+	</div>	    
+
+	<div *ngIf="updatePasswordForm.invalid && (updatePasswordForm.touched || updatePasswordForm.dirty)" class="alert alert-danger">
+	    <p *ngIf="current_password.errors && current_password.errors.required">The current password field is required.</p>
+	    <p *ngIf="new_password.errors && new_password.errors.required">The new password field is required.</p>
+	    <p *ngIf="new_password_confirmation.errors && new_password_confirmation.errors.required">The retyped new password field is required.</p>
+	    <p *ngIf="new_password_confirmation.errors && new_password_confirmation.errors.equalValidate">The retyped password mismatch.</p>
+	</div>
+	<div *ngIf="inputError" class="alert alert-danger">
+	    {{inputError}}
+	</div>
+	<div class="form-group">
+	    <div class="col-md-12">
+		<button [disabled]="updatePasswordForm.invalid" (click)="updatePassword(updatePasswordForm.value)" class="btn btn-success">Update</button>	
+	    </div>
+	</div>	    
+
+    </form>
+</div>

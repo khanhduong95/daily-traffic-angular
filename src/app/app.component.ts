@@ -14,11 +14,9 @@ import { UserService } from './services/user.service';
 })
 
 export class AppComponent {
-    public modalRef: BsModalRef;
-    public input = {};
-    public inputError: string;
-    public currentUser;
-    public loggedIn: boolean;
+    modalRef: BsModalRef;
+    input;
+    inputError: string;
 
     constructor(
 	private modalService: BsModalService,
@@ -29,16 +27,16 @@ export class AppComponent {
     title = 'Daily Traffic';
     
     ngOnInit(): void {
-	this.checkCurrentUser();
+	UserService.cookie = this.cookieService;
     }
 
-    public openModal(template: TemplateRef<any>) {
+    openModal(template: TemplateRef<any>) {
 	delete this.inputError;
 	this.input = {};
 	this.modalRef = this.modalService.show(template);
     }
     
-    public register(){
+    register(){
     	this.userService.create(this.input)
     	    .then(response => {
 		alert("You registered successfully.");
@@ -53,16 +51,15 @@ export class AppComponent {
 	    });	
     }
     
-    public login(){
-    	this.userService.getToken(this.input["email"], this.input["password"])
+    login(){
+    	this.userService.getToken(this.input.email, this.input.password)
     	    .then(response => {
-		this.cookieService.put('token', response.token);
-		this.cookieService.put('fullPermission', response.full_permission);
-		this.cookieService.put('userUrl', response._links.user);
+		UserService.cookie.put('token', response.token);
+		UserService.cookie.put('fullPermission', response.full_permission);
+		UserService.cookie.put('userUrl', response._links.user);
 		console.log("COOKIE: ");
-		console.log(this.cookieService.getAll());
+		console.log(UserService.cookie.getAll());
 		alert("You logged in successfully.");
-		this.checkCurrentUser();
 		this.modalRef.hide();
     	    }, error => {
 		if (error.status == 422){
@@ -76,20 +73,12 @@ export class AppComponent {
 		}
 	    });
     }
-
-    public checkCurrentUser(){
-    	this.loggedIn = false;
-    	if (this.cookieService.get("token") != undefined && this.cookieService.get("userUrl") != undefined){
-    	    this.userService.getDetailByUrl(this.cookieService.get("userUrl"))
-    		.then(user => {
-    		    this.currentUser = user;
-    		    this.loggedIn = true;
-    		});	    
-    	}
-    }
     
-    public logout(){
-	this.cookieService.removeAll();
-    	this.loggedIn = false;
+    logout(){
+	this.userService.clearCookie();
     }
+
+    get currentUser(){
+	return this.userService.currentUser();
+    };
 }

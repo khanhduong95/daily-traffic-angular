@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location }                 from '@angular/common';
 
+import { CookieService } from 'ngx-cookie';
+
 import { User } from './models/user';
 import { UserService } from './services/user.service';
 import 'rxjs/add/operator/switchMap';
@@ -15,6 +17,7 @@ export class UserDetailComponent implements OnInit {
 
     constructor(
 	private userService: UserService,
+	private cookieService: CookieService,
 	private route: ActivatedRoute,
 	private router: Router,
 	private location: Location
@@ -34,5 +37,4 @@ export class UserDetailComponent implements OnInit {
 		this.error = "User not found.";
 	    });
     }
-
 }
