@@ -49,21 +49,21 @@
 	<div class="form-group">
 	    <label for="password" class="col-md-12">Current Password</label>
 	    <div class="col-md-12">
-		<input type="password" class="form-control" id="current_password" name="current_password" [(ngModel)]="input.current_password" required #current_password="ngModel"/>
+		<input type="password" class="form-control" id="current_password" name="current_password" (ngModel)="current_password" required #current_password="ngModel"/>
 	    </div>
 	</div>	    
 
 	<div class="form-group">
 	    <label for="password" class="col-md-12">New Password</label>
 	    <div class="col-md-12">
-		<input type="password" class="form-control" id="new_password" name="new_password" [(ngModel)]="input.new_password" required #new_password="ngModel"/>
+		<input type="password" class="form-control" id="new_password" name="new_password" (ngModel)="new_password" required #new_password="ngModel"/>
 	    </div>
 	</div>	    
 
 	<div class="form-group">
 	    <label for="password" class="col-md-12">Confirm New Password</label>
 	    <div class="col-md-12">
-		<input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" [(ngModel)]="input.new_password_confirmation" required equalValidate="new_password" #new_password_confirmation="ngModel"/>
+		<input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" (ngModel)="new_password_confirmation" required equalValidate="new_password" #new_password_confirmation="ngModel"/>
 	    </div>
 	</div>	    
 

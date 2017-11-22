@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
 	private userService: UserService
     ) {}
 
-    getUsersList(page: number): void {
+    getList(page: number): void {
 	this.userService.getList(page).then(response => {
 	    this.usersList = response.data;
 	    this.currentPage = response.current_page;
@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit(): void {
-	this.getUsersList(1);
+	this.getList(1);
     }
 
     getDetail(id: number): void {

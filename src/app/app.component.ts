@@ -9,7 +9,6 @@ import { UserService } from './services/user.service';
 
 @Component({
     selector: 'my-app',
-    styleUrls: ['../../node_modules/bootstrap/dist/css/bootstrap.min.css'],
     templateUrl: '../assets/templates/app.component.html',
 })
 

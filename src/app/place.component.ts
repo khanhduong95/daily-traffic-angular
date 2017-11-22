@@ -22,7 +22,7 @@ export class PlaceComponent implements OnInit {
 	private placeService: PlaceService
     ) {}
 
-    getPlacesList(page: number): void {
+    getList(page: number): void {
 	this.placeService.getList(page).then(response => {
 	    this.placesList = response.data;
 	    this.currentPage = response.current_page;
@@ -33,7 +33,7 @@ export class PlaceComponent implements OnInit {
     }
 
     ngOnInit(): void {
-	this.getPlacesList(1);
+	this.getList(1);
     }
 
     getDetail(id: number): void {
